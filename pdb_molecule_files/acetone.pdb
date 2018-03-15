@@ -1,0 +1,12 @@
+CRYST1   57.327   57.327   57.327  90.00  90.00  90.00 P 1           1
+HETATM    1  O2a actnX   1       4.150  10.360  24.820  1.00  0.00           O  
+HETATM    2  C2a actnX   1       4.600   9.450  25.490  1.00  0.00           C  
+HETATM    3  C3a actnX   1       3.710   8.420  26.130  1.00  0.00           C  
+HETATM    4 C3a1 actnX   1       6.090   9.110  25.730  1.00  0.00           C  
+HETATM    5  H3a actnX   1       2.650   8.700  26.200  1.00  0.00           H  
+HETATM    6 H3a1 actnX   1       3.870   7.530  25.530  1.00  0.00           H  
+HETATM    7 H3a2 actnX   1       4.100   8.190  27.120  1.00  0.00           H  
+HETATM    8 H3a3 actnX   1       6.240   8.070  25.440  1.00  0.00           H  
+HETATM    9 H3a4 actnX   1       6.350   9.060  26.790  1.00  0.00           H  
+HETATM   10 H3a5 actnX   1       6.800   9.800  25.270  1.00  0.00           H  
+END

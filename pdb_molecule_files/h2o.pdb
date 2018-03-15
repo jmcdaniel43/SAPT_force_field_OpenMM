@@ -1,0 +1,6 @@
+REMARK   1 CREATED WITH OPENMM 7.1.1, 2017-08-02
+CRYST1   26.367   26.367   26.367  90.00  90.00  90.00 P 1           1 
+HETATM    1  O   HOH A   1      13.574  25.585  14.967  1.00  0.00           O  
+HETATM    2  H1  HOH A   1      14.501  25.628  15.202  1.00  0.00           H  
+HETATM    3  H2  HOH A   1      13.159  26.257  15.508  1.00  0.00           H  
+END

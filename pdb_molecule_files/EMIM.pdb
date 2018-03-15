@@ -1,0 +1,21 @@
+CRYST1   24.314   24.314  214.431  90.00  90.00 120.00 P 1           1
+HETATM    1  NI1 EMIMX   1       0.510  13.910  23.270  1.00  0.00           N  
+HETATM    2  NI  EMIMX   1      -1.690  13.800  23.540  1.00  0.00           N  
+HETATM    3  CI  EMIMX   1      -0.550  14.450  23.880  1.00  0.00           C  
+HETATM    4  HI  EMIMX   1      -0.490  15.290  24.540  1.00  0.00           H  
+HETATM    5  CWI EMIMX   1       0.070  12.940  22.360  1.00  0.00           C  
+HETATM    6  HWI EMIMX   1       0.570  12.360  21.610  1.00  0.00           H  
+HETATM    7 CWI1 EMIMX   1      -1.330  12.960  22.470  1.00  0.00           C  
+HETATM    8 HWI1 EMIMX   1      -1.960  12.260  21.960  1.00  0.00           H  
+HETATM    9  CMI EMIMX   1       1.920  14.440  23.270  1.00  0.00           C  
+HETATM   10 HMI1 EMIMX   1       1.970  15.370  22.720  1.00  0.00           H  
+HETATM   11 HMI2 EMIMX   1       2.550  13.720  22.770  1.00  0.00           H  
+HETATM   12 HMI3 EMIMX   1       2.150  14.630  24.300  1.00  0.00           H  
+HETATM   13  CAI EMIMX   1      -3.050  13.950  24.080  1.00  0.00           C  
+HETATM   14 HAI1 EMIMX   1      -3.210  12.940  24.440  1.00  0.00           H  
+HETATM   15 HAI2 EMIMX   1      -3.040  14.620  24.930  1.00  0.00           H  
+HETATM   16  CTI EMIMX   1      -3.960  14.410  22.940  1.00  0.00           C  
+HETATM   17 HTI1 EMIMX   1      -3.340  15.020  22.280  1.00  0.00           H  
+HETATM   18 HTI2 EMIMX   1      -4.240  13.530  22.370  1.00  0.00           H  
+HETATM   19 HTI3 EMIMX   1      -4.840  14.960  23.240  1.00  0.00           H  
+END

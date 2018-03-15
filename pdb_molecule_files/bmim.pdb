@@ -1,0 +1,28 @@
+REMARK   1 CREATED WITH OPENMM 7.1.1, 2017-08-17
+CRYST1   46.389   46.389   46.389  90.00  90.00  90.00 P 1           1 
+HETATM    1  N1  BMIMA   1      11.491  37.591   6.017  1.00  0.00           N  
+HETATM    2  N11 BMIMA   1      11.060  35.511   5.677  1.00  0.00           N  
+HETATM    3  C1  BMIMA   1      10.936  36.728   5.194  1.00  0.00           C  
+HETATM    4  H1  BMIMA   1      10.446  36.978   4.277  1.00  0.00           H  
+HETATM    5  C2  BMIMA   1      12.017  36.887   7.079  1.00  0.00           C  
+HETATM    6  H2  BMIMA   1      12.526  37.370   7.885  1.00  0.00           H  
+HETATM    7  C21 BMIMA   1      11.761  35.593   6.862  1.00  0.00           C  
+HETATM    8  H21 BMIMA   1      12.003  34.728   7.440  1.00  0.00           H  
+HETATM    9  C3  BMIMA   1      11.547  39.047   5.845  1.00  0.00           C  
+HETATM   10  H3  BMIMA   1      11.071  39.522   6.690  1.00  0.00           H  
+HETATM   11  H31 BMIMA   1      12.579  39.359   5.782  1.00  0.00           H  
+HETATM   12  H32 BMIMA   1      11.029  39.319   4.937  1.00  0.00           H  
+HETATM   13  C4  BMIMA   1      10.561  34.263   5.063  1.00  0.00           C  
+HETATM   14  H4  BMIMA   1       9.812  34.545   4.338  1.00  0.00           H  
+HETATM   15  H41 BMIMA   1      10.077  33.697   5.845  1.00  0.00           H  
+HETATM   16  C5  BMIMA   1      11.669  33.447   4.406  1.00  0.00           C  
+HETATM   17  H5  BMIMA   1      12.132  34.064   3.640  1.00  0.00           H  
+HETATM   18  H51 BMIMA   1      12.409  33.206   5.164  1.00  0.00           H  
+HETATM   19  C51 BMIMA   1      11.157  32.150   3.773  1.00  0.00           C  
+HETATM   20  H52 BMIMA   1      10.672  31.549   4.537  1.00  0.00           H  
+HETATM   21  H53 BMIMA   1      10.429  32.398   3.006  1.00  0.00           H  
+HETATM   22  C6  BMIMA   1      12.288  31.338   3.143  1.00  0.00           C  
+HETATM   23  H6  BMIMA   1      13.009  31.023   3.888  1.00  0.00           H  
+HETATM   24  H61 BMIMA   1      11.905  30.449   2.657  1.00  0.00           H  
+HETATM   25  H62 BMIMA   1      12.817  31.919   2.397  1.00  0.00           H  
+END
