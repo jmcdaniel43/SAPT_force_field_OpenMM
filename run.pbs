@@ -1,0 +1,23 @@
+#PBS -N example_job
+#PBS -q gemini-gpu
+#PBS -o energies.$PBS_JOBID
+#PBS -e error.$PBS_JOBID
+#PBS -l nodes=1:ppn=1
+#PBS -l walltime=10:00:00:00
+
+cd $PBS_O_WORKDIR
+
+hostname
+
+module load cuda/7.0.28
+module load anaconda3/latest
+
+# this version has fix for periodic bonded forces in e.g. graphene
+source activate my_python-3.6_beta
+
+#export PATH=$HOME/program/anaconda3/bin:$PATH
+
+## export LD_LIBRARY_PATH=/usr/local/cuda/7.5/lib:$LD_LIBRARY_PATH
+export OPENMM_CUDA_COMPILER=$(which nvcc)
+
+python run_openMM.py
