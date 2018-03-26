@@ -1183,7 +1183,7 @@
  </RBTorsionForce>
  <CustomTorsionForce energy="k*(theta^2)">
   <PerTorsionParameter name="k"/>
-  <Improper type1="NO3-N" type2="NO3-O1" type3="NO3-O2" type4="NO3-O3" k="251.04"/>
+  <Improper type1="NO3-N1" type2="NO3-O1" type3="NO3-O2" type4="NO3-O3" k="251.04"/>
  </CustomTorsionForce>
  <NonbondedForce coulomb14scale="0" lj14scale="0">
   <Atom type="swm4ndp-O" charge="1.71636" sigma="0.318395" epsilon="0.882573"/>
