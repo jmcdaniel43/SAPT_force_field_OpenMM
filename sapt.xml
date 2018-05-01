@@ -210,7 +210,9 @@
   <Type name="PF6-DF5" class="Sh" mass="0.4"/>
   <Type name="PF6-F6" class="FI" element="F" mass="18.5984"/>
   <Type name="PF6-DF6" class="Sh" mass="0.4"/>
-  <Type name="NO3-N1" class="NNO" element="N" mass="13.6067"/>
+  <!--      virtual site for NO3   -->
+  <Type name="NO3-M1" class="MNO" element="N"  mass="13.6067"/>
+  <Type name="NO3-N1" class="NNO"  mass="0"/>
   <Type name="NO3-DN" class="Sh" mass="0.4"/>
   <Type name="NO3-O1" class="ONO" element="O" mass="15.5994"/>
   <Type name="NO3-DO1" class="Sh" mass="0.4"/>
@@ -380,14 +382,19 @@
    <Bond from="0" to="6"/>
   </Residue>
   <Residue name="NO3">
-   <Atom name="N1" type="NO3-N1"/>
+   <Atom name="M" type="NO3-M1"/>
    <Atom name="O1" type="NO3-O1"/>
    <Atom name="O2" type="NO3-O2"/>
    <Atom name="O3" type="NO3-O3"/>
+   <Atom name="N" type="NO3-N1"/>
    <Atom name="DN" type="NO3-DN"/>
    <Atom name="DO1" type="NO3-DO1"/>
    <Atom name="DO2" type="NO3-DO2"/>
    <Atom name="DO3" type="NO3-DO3"/>
+   <VirtualSite type="average3" index="4" atom1="1" atom2="2" atom3="3" weight1="0.33333333" weight2="0.33333333" weight3="0.33333333"/>
+   <Bond from="1" to="2"/>
+   <Bond from="1" to="3"/>
+   <Bond from="2" to="3"/>
    <Bond from="0" to="1"/>
    <Bond from="0" to="2"/>
    <Bond from="0" to="3"/>
@@ -952,7 +959,11 @@
   <Bond class1="C3a" class2="H3a" length="0.110" k="284512.0"/>
   <Bond class1="B" class2="FI" length="0.139" k="121300.0"/>
   <Bond class1="P" class2="FI" length="0.160" k="79500.0"/>
-  <Bond class1="NNO" class2="ONO" length="0.12676" k="439320.0"/>
+  <!--      virtual site for NO3   -->
+  <!-- <Bond class1="NNO" class2="ONO" length="0.12676" k="439320.0"/>  -->
+  <Bond class1="MNO" class2="ONO" length="0.12676" k="439320.0"/>
+  <Bond class1="ONO" class2="ONO" length="0.215" k="439320.0"/>
+  <!--      end virtual site for NO3   -->
   <Bond class1="Sfs" class2="Ofs" length="0.14400" k="630000.0"/>
   <Bond class1="Nfs" class2="Sfs" length="0.15800" k="360000.0"/>
   <Bond class1="Sfs" class2="Ffs" length="0.16100" k="230000.0"/>
@@ -1041,7 +1052,10 @@
   <Angle type1="PF6-F2" type2="PF6-P" type3="PF6-F5" angle="3.141592654" k="335.0" />
   <Angle type1="PF6-F3" type2="PF6-P" type3="PF6-F4" angle="3.141592654" k="335.0" />
    <!-- end PF6 atom type -->
-  <Angle class1="ONO" class2="NNO" class3="ONO" angle="2.0943951023932" k="878.64"/>
+  <!--      virtual site for NO3   -->
+  <!-- <Angle class1="ONO" class2="NNO" class3="ONO" angle="2.0943951023932" k="878.64"/> -->
+  <Angle class1="ONO" class2="MNO" class3="ONO" angle="2.0943951023932" k="878.64"/>
+  <!--     end virtual site for NO3   -->
   <Angle class1="Ofs" class2="Sfs" class3="Ofs" angle="2.0943951023932" k="870.272"/>
   <Angle class1="Ofs" class2="Sfs" class3="Ffs" angle="1.79768912955416" k="870.272"/>
   <Angle class1="Ofs" class2="Sfs" class3="Nfs" angle="1.97222205475359" k="800.0"/>
@@ -1181,9 +1195,11 @@
   <Proper class1="C2" class2="Or" class3="CT" class4="HC" c0="0.41" c1="1.24" c2="0.0" c3="-1.66" c4="0.0" c5="0.0"/>
   <Proper class1="CT" class2="Or" class3="C2" class4="O2" c0="20.92" c1="0.0" c2="-20.92" c3="0.0" c4="0.0" c5="0.0"/>
  </RBTorsionForce>
- <CustomTorsionForce energy="k*(theta^2)">
+  <!--      virtual site for NO3   -->
+  <CustomTorsionForce energy="k*(theta^2)">
   <PerTorsionParameter name="k"/>
-  <Improper type1="NO3-N1" type2="NO3-O1" type3="NO3-O2" type4="NO3-O3" k="251.04"/>
+  <!--<Improper type1="NO3-N1" type2="NO3-O1" type3="NO3-O2" type4="NO3-O3" k="2051.04"/> -->
+  <Improper type1="NO3-M1" type2="NO3-O1" type3="NO3-O2" type4="NO3-O3" k="251.04"/>
  </CustomTorsionForce>
  <NonbondedForce coulomb14scale="0" lj14scale="0">
   <Atom type="swm4ndp-O" charge="1.71636" sigma="0.318395" epsilon="0.882573"/>
@@ -1382,7 +1398,9 @@
   <Atom type="PF6-DF5" charge="-0.7930" sigma="1.00000" epsilon="0.00000"/>
   <Atom type="PF6-F6" charge="0.3326" sigma="1.00000" epsilon="0.00000"/>
   <Atom type="PF6-DF6" charge="-0.7930" sigma="1.00000" epsilon="0.00000"/>
-  <Atom type="NO3-N1" charge="2.1431" sigma="1.00000" epsilon="0.00000"/>
+  <!--      virtual site for NO3   -->
+  <Atom type="NO3-M1" charge="1.0899" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="NO3-N1" charge="1.0532" sigma="1.00000" epsilon="0.00000"/>
   <Atom type="NO3-DN" charge="-1.0899" sigma="1.00000" epsilon="0.00000"/>
   <Atom type="NO3-O1" charge="0.2504" sigma="1.00000" epsilon="0.00000"/>
   <Atom type="NO3-DO1" charge="-0.9348" sigma="1.00000" epsilon="0.00000"/>
@@ -1517,7 +1535,8 @@
   <Particle type1="BF4-DF2" type2="BF4-F2" charge="-0.7930" polarizability="0.000931897" thole="1"/>
   <Particle type1="BF4-DF3" type2="BF4-F3" charge="-0.7930" polarizability="0.000931897" thole="1"/>
   <Particle type1="BF4-DF4" type2="BF4-F4" charge="-0.7930" polarizability="0.000931897" thole="1"/>
-  <Particle type1="NO3-DN" type2="NO3-N1" charge="-1.0899" polarizability="0.00176033" thole="1"/>
+  <!--      virtual site for NO3   -->
+  <Particle type1="NO3-DN" type2="NO3-M1" charge="-1.0899" polarizability="0.00176033" thole="1"/>
   <Particle type1="NO3-DO1" type2="NO3-O1" charge="-0.9348" polarizability="0.00129497" thole="1"/>
   <Particle type1="NO3-DO2" type2="NO3-O2" charge="-0.9348" polarizability="0.00129497" thole="1"/>
   <Particle type1="NO3-DO3" type2="NO3-O3" charge="-0.9348" polarizability="0.00129497" thole="1"/>
@@ -1667,6 +1686,7 @@
   <Atom class="B" Aexch="11862.8" Aelec="0.0" Aind="0.0" Adhf="0.0" Bexp="29.518" C6="0.0009733" C8="5.3191e-05" C10="5.3711e-06" C12="3.301846e-07"/>
   <Atom class="P" Aexch="0.0" Aelec="0.0" Aind="0.0" Adhf="0.0" Bexp="33.184" C6="0.0035821" C8="0.000300625" C10="1.180089e-05" C12="0"/>
   <Atom class="FI" Aexch="180128.4" Aelec="80998.3" Aind="0.0" Adhf="13995.8" Bexp="35.961" C6="0.0007953" C8="5.754e-05" C10="2.75526e-06" C12="8.57594e-08"/>
+  <Atom class="MNO" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="100" C6="0" C8="0" C10="0" C12="0"/>
   <Atom class="NNO" Aexch="29405.6" Aelec="5093.5" Aind="2363.0" Adhf="0.0" Bexp="39.061" C6="0.0013055" C8="0.000100467" C10="8.73950000000001e-06" C12="5.967131e-07"/>
   <Atom class="ONO" Aexch="129962.3" Aelec="65243.7" Aind="0.0" Adhf="7876.5" Bexp="32.125" C6="0.001467" C8="9.34700000000001e-05" C10="7.41171e-06" C12="4.376966e-07"/>
   <Atom class="CWI1" Aexch="422654.8" Aelec="198880.5" Aind="0.0" Adhf="39863.4" Bexp="34.384" C6="0.0014149" C8="6.1588e-05" C10="9.41083000000001e-06" C12="5.057034e-07"/>

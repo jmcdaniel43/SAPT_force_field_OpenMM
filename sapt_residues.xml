@@ -107,17 +107,22 @@
    <Bond from="C3a1" to="H3a5"/>
  </Residue>
  <Residue name="NO3">
-  <Atom name="N" type="NO3-B"/>
+  <Atom name="M" type="NO3-M1"/>
   <Atom name="O1" type="NO3-O1"/>
   <Atom name="O2" type="NO3-O2"/>
   <Atom name="O3" type="NO3-O3"/>
+  <Atom name="N" type="NO3-N1"/>
   <Atom name="DN" type="NO3-DN"/>
   <Atom name="DO1" type="NO3-DO1"/>
   <Atom name="DO2" type="NO3-DO2"/>
   <Atom name="DO3" type="NO3-DO3"/>
-  <Bond from="N" to="O1"/>
-  <Bond from="N" to="O2"/>
-  <Bond from="N" to="O3"/>
+  <VirtualSite type="average3" index="4" atom1="1" atom2="2" atom3="3" weight1="0.33333333" weight2="0.33333333" weight3="0.33333333"/>
+  <Bond from="O1" to="O2"/>
+  <Bond from="O1" to="O3"/>
+  <Bond from="O2" to="O3"/>
+  <Bond from="M" to="O1"/>
+  <Bond from="M" to="O2"/>
+  <Bond from="M" to="O3"/>
  </Residue>
  <Residue name="BF4">
   <Atom name="B" type="BF4-B"/>
