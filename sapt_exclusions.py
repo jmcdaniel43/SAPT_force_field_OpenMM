@@ -63,10 +63,10 @@ class sapt_generate_exclusions:
         print('Creating Interaction Groups for CustomNonBonded.  These interactions will be computed between water-other, not water-water.')
         for res in sim.topology.residues():
             if res.name == self.watername:
-                for i in range(len(res._atoms)-1):
+                for i in range(len(res._atoms)):
                     self.water.update([res._atoms[i].index])
             else:
-                for i in range(len(res._atoms)-1):
+                for i in range(len(res._atoms)):
                     self.notwater.update([res._atoms[i].index])
 
         self.customNonbondedForce.addInteractionGroup(self.water, self.notwater)
