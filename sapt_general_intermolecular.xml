@@ -151,9 +151,9 @@
     <!-- this carbon type should be used for first adjacent alkyl carbon atoms to imidazolium ring, note different VDWs parameters compared to "C" class... -->
   <Atom type="IM-Ca1" Aexch="304938.7" Aelec="117598.0" Aind="11.7" Adhf="2837.1" Bexp="34.384" C6="0.0007166" C8="0" C10="0" C12="0"/>         
   <!-- these parameters should be used for alkyl-ammonium (central N, C, H atoms) cations                --!>
-  <Atom class="TMA-N" Aexch="252625.61" Aelec="102236.97" Aind="0.0" Adhf="17538.34" Bexp="39.061" C6="0.0010187" C8="6.24594e-05" C10="9.21956200000001e-06" C12="6.7692452e-07"/>
-  <Atom class="TMA-H" Aexch="9627.71" Aelec="1310.12" Aind="1071.2" Adhf="1331.13" Bexp="37.794" C6="0.00012945" C8="6.7972e-06" C10="4.996e-07" C12="0"/>
-  <Atom class="TMA-C" Aexch="304938.7" Aelec="117598.0" Aind="11.7" Adhf="2837.1" Bexp="34.384" C6="0.00091067" C8="0" C10="0" C12="0"/>
+  <Atom type="TMA-N" Aexch="252625.61" Aelec="102236.97" Aind="0.0" Adhf="17538.34" Bexp="39.061" C6="0.0010187" C8="6.24594e-05" C10="9.21956200000001e-06" C12="6.7692452e-07"/>
+  <Atom type="TMA-H" Aexch="9627.71" Aelec="1310.12" Aind="1071.2" Adhf="1331.13" Bexp="37.794" C6="0.00012945" C8="6.7972e-06" C10="4.996e-07" C12="0"/>
+  <Atom type="TMA-C" Aexch="304938.7" Aelec="117598.0" Aind="11.7" Adhf="2837.1" Bexp="34.384" C6="0.00091067" C8="0" C10="0" C12="0"/>
   <!-- special hydrogen type for dichloroethane                                              -->
   <Atom type="dch-H" Aexch="10320.8" Aelec="911.3" Aind="966.184" Adhf="1346.8" Bexp="37.794" C6="0.0001294" C8="6.797e-06" C10="4.996e-07" C12="0"/>
   <!-- the dispersion parameters for acetonitrile are scaled down by ~2.5 % to implicitly account for 3-body dispersion    -->
