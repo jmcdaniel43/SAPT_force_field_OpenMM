@@ -1,0 +1,175 @@
+<ForceField>
+<!--                                                          README                                                                                         -->
+<!--                                                                                                                                                         -->
+<!--Here we "consolidate" our SAPT-FF force field parameters into the most general set of transferable interaction parameters.                        -->
+<!--This is ONLY for INTER-molecular interactions.  We have removed all intra-molecular parameters, as dihedrals will not be transferable                    -->
+<!--                                                                                                                                                         -->
+<!--We do not attempt to make transferable charges.  Charges are the least transferable intermolecular interactions parameters, and are easily fit           -->
+<!--on a 'per-molecule' basis.  Hence charges should be fit for each molecule and combined with the other non-bonded interaction parameters.                 -->
+<!--                                                                                                                                                         -->
+<!--To use this force field, the user should create a 'pdb' file for their molecule(s) of interest, and match the atomtypes in the pdb file                  -->
+<!--to atomtypes in the force field file.  Also the user should fit charges for their new molecule, and create a new force field file incorporating these    -->
+<!--charges.  Then, interactions can be computed with OpenMM                                                                                                 -->
+<!--                                                                                                                                                         -->
+<!--Note that any molecule that has atoms separated by more than 3 bonds will have intra-molecular (non-bonded) interactions that OpenMM will include.       -->
+<!--These should be subtracted from the total energy (using, i.e. a calculation on a single molecule) to get the interaction energy.                         -->
+<!--                                                                                                                                                         -->
+
+ <AtomTypes>
+<!--                FILL this section in with molecule specific information, e.g. using lines similar to below...                                            -->
+<!--                the 'class' determines what nonbonded force field parameters the atom uses...                                                            -->
+<!--                if you want polarization on the atom, you need to create a corresponding 'Drude particle' such as below...                               -->
+    <!-- non-polarizable atom would look similar to this... --!>
+  <Type name="BF4-B" class="B" element="B" mass="10.811"/>
+    <!-- polarizable atom would look similar to this, take some mass and add it to Drude... --!>
+  <Type name="BF4-B" class="B" element="B" mass="10.411"/>
+  <Type name="BF4-DB" class="BSh" mass="0.4"/>
+ </AtomTypes>
+ <Residues>
+    <!-- make a Residue section for each molecule.  For polarizable BF4, would look like this.  Note we need to define Bonds for exclusions... --!>
+  <Residue name="BF4">
+   <Atom name="B" type="BF4-B"/>
+   <Atom name="F1" type="BF4-F"/>
+   <Atom name="F2" type="BF4-F"/>
+   <Atom name="F3" type="BF4-F"/>
+   <Atom name="F4" type="BF4-F"/>
+   <Atom name="DB" type="BF4-DB"/>
+   <Atom name="DF1" type="BF4-DF"/>
+   <Atom name="DF2" type="BF4-DF"/>
+   <Atom name="DF3" type="BF4-DF"/>
+   <Atom name="DF4" type="BF4-DF"/>
+   <Bond from="0" to="1"/>
+   <Bond from="0" to="2"/>
+   <Bond from="0" to="3"/>
+   <Bond from="0" to="4"/>
+  </Residue>
+ </Residues>
+<!--              zero's here mean 1-4 intramolecular nonbonded interactions are excluded, and only 1-5 and farther are considered                   -->
+ <NonbondedForce coulomb14scale="0" lj14scale="0">
+<!--                FILL this section in with charges for all atoms, e.g. using lines similar to below...                                            -->
+<!--                Note if the atom has a Drude oscillator attached, the total charge on the atom needs to be                                       -->
+<!--                 q_atom = q_static - q_drude , where q_static is the static charge of the atom, the drude charge is given by                     -->
+<!--                 q_drude = sqrt( alpha / k_spring ) , where alpha is the atomic polarizability and k_spring is the spring constant for           -->
+<!--                 the Drude oscillator (see  "<DrudeForce>" section)                                                                              -->
+     <!--  this is example input for a Boron atom without polarization.                --!>
+     <!--  Note we use 'type' instead of 'class' to define charges, as we want to      --!>
+     <!--  make charge assignment more specific                                        --!>         
+  <Atom type="BF4-B" charge="1.2008" sigma="1.00000" epsilon="0.00000"/>
+     <!--  this is example input for a Boron atom with polarization                    --!>
+  <Atom type="BF4-B" charge="1.3538" sigma="1.00000" epsilon="0.00000"/>
+  <Atom type="BF4-DB" charge="-0.1530" sigma="1.00000" epsilon="0.00000"/>           
+ </NonbondedForce>
+ <DrudeForce>
+<!--                Choose polarizabilities for each atom in the molecule (don't use polarizability for hydrogen)                                    -->
+<!--                Polarizabilities are fairly transferable, that's why we mostly define in terms of 'class' rather than 'type'                     -->
+<!--                 use specific 'type' rather than 'class' if you want more specific assignment.                                                   -->
+  <Particle class="BSh" class="B" charge="-0.153" polarizability="0.000035" thole="1"/>
+  <Particle class="CSh" class="C" charge="-1.252" polarizability="0.002324" thole="1"/>
+  <Particle class="NSh" class="N" charge="-1.015" polarizability="0.001527" thole="1"/>
+  <Particle class="OSh" class="O" charge="-0.893" polarizability="0.001182" thole="1"/>
+  <Particle class="FSh" class="F" charge="-0.793" polarizability="0.000932" thole="1"/>
+  <Particle class="PSh" class="P" charge="-0.612" polarizability="0.000555" thole="1"/>
+  <Particle class="CLSh" class="CL" charge="-1.282" polarizability="0.002435" thole="1"/>
+   <!-- carbon atom type for C=O , or C(triple)N (carbonyl, acetonitrile, etc.)        -->
+  <Particle class="CbSh" class="Cb" charge="-0.716" polarizability="0.000760" thole="1"/>
+
+    <!-- note different thole value here is because of SWM-NDP water model, doesn't really matter though --!>
+    <!-- because we only use thole functions for intra-molecular Drude-Drude interactions                --!>
+  <Particle type1="H2O-DO" type2="H2O-O" charge="-1.716" polarizability="0.000978" thole="1.3"/>
+    <!-- these polarizabilities should be used for nitrate anion                           --!>
+  <Particle type1="NO3-DN" type2="NO3-N" charge="-1.090" polarizability="0.001760" thole="1"/>
+  <Particle type1="NO3-DO" type2="NO3-O" charge="-0.935" polarizability="0.001295" thole="1"/>
+    <!-- these polarizabilities should be used for TFSI/FSI/triflate anions                --!>
+  <Particle type1="TFSI-DO" type2="TFSI-O" charge="-0.919" polarizability="0.001252" thole="1"/>
+  <Particle type1="TFSI-DN" type2="TFSI-N" charge="-1.396" polarizability="0.002887" thole="1"/>
+  <Particle type1="TFSI-DF" type2="TFSI-F" charge="-0.567" polarizability="0.000476" thole="1"/>
+  <Particle type1="TFSI-DS" type2="TFSI-S" charge="-1.192" polarizability="0.002106" thole="1"/>
+  <Particle type1="TFSI-DC" type2="TFSI-C" charge="-1.159" polarizability="0.001991" thole="1"/>
+    <!-- these polarizabilities should be used for ring carbon, nitrogen atoms of imidazolium cations         --!>
+  <Particle type1="IM-DCr"  type2="IM-Cr"  charge="-1.148" polarizability="0.001952" thole="1"/>
+  <Particle type1="IM-DNr"  type2="IM-Nr"  charge="-0.840" polarizability="0.001047" thole="1"/>
+    <!-- these polarizabilities should be used for alkyl-ammonium (central N, C atoms) cations                --!>
+  <Particle type1="TMA-DC" type2="TMA-C"   charge="-1.148" polarizability="0.001952" thole="1"/>
+  <Particle type1="TMA-DN" type2="TMA-N"   charge="-0.959" polarizability="0.001363" thole="1"/>
+ </DrudeForce>
+ <CustomNonbondedForce energy="A*exBr - f6*C6/(r^6) - f8*C8/(r^8) - f10*C10/(r^10) - f12*C12/(r^12);
+    A=Aex-Ael-Ain-Adh;
+    Aex=sqrt(Aexch1*Aexch2); Ael=sqrt(Aelec1*Aelec2); Ain=sqrt(Aind1*Aind2); Adh=sqrt(Adhf1*Adhf2);
+    f12 = f10 - exBr*( (1/39916800)*(Br^11)*(1 + Br/12) );
+    f10 = f8 - exBr*( (1/362880)*(Br^9)*(1 + Br/10 ) );
+    f8 = f6 - exBr*( (1/5040)*(Br^7)*(1 + Br/8 ) );
+    f6 = 1 - exBr*(1 + Br * (1 + (1/2)*Br*(1 + (1/3)*Br*(1 + (1/4)*Br*(1 + (1/5)*Br*(1 + (1/6)*Br ) ) )  ) ) );
+    exBr = exp(-Br);
+    Br = B*r;
+    B=(Bexp1+Bexp2)*Bexp1*Bexp2/(Bexp1^2 + Bexp2^2);
+    C6=sqrt(C61*C62); C8=sqrt(C81*C82); C10=sqrt(C101*C102); C12=sqrt(C121*C122)"
+    bondCutoff="3">
+<!--                Note that above setting 'bondCutoff=3' excludes through 1-4 interactions, consistent with NonbondedForce                         -->
+<!--                Choose short-range exponential and VDWs parameters for each atom in the molecule                                                 -->
+<!--                Note that these parameters are fairly transferable, that's why we mostly define in terms of 'class' rather than 'type'           -->
+<!--                units are: A (kJ/mol) , B (nm^-1) , Cn (kJ/mol * nm^n)                                                                           -->
+  <PerParticleParameter name="Aexch"/>
+  <PerParticleParameter name="Aelec"/>
+  <PerParticleParameter name="Aind"/>
+  <PerParticleParameter name="Adhf"/>
+  <PerParticleParameter name="Bexp"/>
+  <PerParticleParameter name="C6"/>
+  <PerParticleParameter name="C8"/>
+  <PerParticleParameter name="C10"/>
+  <PerParticleParameter name="C12"/>
+  <Atom class="H" Aexch="15986.7" Aelec="3623.5" Aind="746.7" Adhf="1467.9" Bexp="37.776" C6="0.0001294" C8="6.796e-06" C10="4.9953e-07" C12="0"/>
+  <Atom class="B" Aexch="11862.8" Aelec="0.0" Aind="0.0" Adhf="0.0" Bexp="29.518" C6="0.0009733" C8="5.3191e-05" C10="5.3711e-06" C12="3.301846e-07"/>
+  <Atom class="C" Aexch="304938.7" Aelec="117598.0" Aind="11.7" Adhf="2837.1" Bexp="34.384" C6="0.0013545" C8="5.705e-05" C10="1.80898e-06" C12="5.20977e-08"/>
+  <Atom class="N" Aexch="252624.4" Aelec="102233.5" Aind="0.0" Adhf="17537.3" Bexp="39.061" C6="0.0010187" C8="6.2460e-05" C10="9.21975e-06" C12="6.769417e-07"/>
+  <Atom class="O" Aexch="336155.8" Aelec="106585.3" Aind="857.4" Adhf="18802.0" Bexp="37.795" C6="0.000705" C8="4.304e-05" C10="2.9906e-06" C12="1.5909e-07"/>
+  <Atom class="F" Aexch="180128.4" Aelec="80998.3" Aind="0.0" Adhf="13995.8" Bexp="35.961" C6="0.0007953" C8="5.754e-05" C10="2.75526e-06" C12="8.57594e-08"/>
+  <Atom class="P" Aexch="0.0" Aelec="0.0" Aind="0.0" Adhf="0.0" Bexp="33.184" C6="0.0035821" C8="0.000300625" C10="1.180089e-05" C12="0"/>
+  <Atom class="CL" Aexch="1039330.4" Aelec="397309.0" Aind="36890.1" Adhf="49537.9" Bexp="33.0698" C6="0.0053993" C8="0.000483006" C10="5.722893e-05" C12="0"/>
+   <!-- carbon, oxygen atom type for C=O carbonyl groups                                    -->
+  <Atom class="Cb" Aexch="263600.2" Aelec="112896.5"    Aind="11.7" Adhf="2837.2" Bexp="34.384" C6="0.0007729" C8="2.3492e-05" C10="2.75392e-06" C12="1.023663e-07"/>
+  <Atom class="Ob" Aexch="315060.0" Aelec="139939.1" Aind="29536.9" Adhf="26583.2" Bexp="37.795" C6="0.0013191" C8="5.7131e-05" C10="4.58043e-06" C12="2.208856e-07"/>
+  <!-- alcohol O, H parameters                                                              -->
+  <Atom class="OH" Aexch="398289.0" Aelec="140369.0" Aind="14748.0" Adhf="13141.0" Bexp="37.794" C6="0.001462" C8="8.665e-05" C10="5.5467e-06" C12="2.7977e-07"/>
+  <Atom class="HO" Aexch="1182.0" Aelec="428.0" Aind="92.0" Adhf="223.0" Bexp="31.483" C6="9.379e-05" C8="2.607e-06" C10="4.151e-07" C12="0"/>
+  <!--  water, SAPT-FF parameters.  Midbond site is same location as SWM4-NDP       -->
+  <Atom type="H2O-O" Aexch="154905" Aelec="77452" Aind="21529" Adhf="0.0" Bexp="36.84974" C6="0.000456" C8="3.67376E-05" C10="2.87553E-06" C12="1.81911E-07"/>
+  <Atom type="H2O-H" Aexch="1575." Aelec="0.0" Aind="0.0" Adhf="0.0" Bexp="58.582" C6="2.6E-06" C8="1.3198E-07" C10="1.87942E-08" C12="1.30988E-09"/>
+  <Atom type="H2O-M" Aexch="55923" Aelec="13653" Aind="893" Adhf="788" Bexp="32.12541" C6="0.000841" C8="3.8005E-05" C10="1.76105E-06" C12="6.50111E-08"/>
+    <!-- these parameters should be used for nitrate anion                           --!>
+  <Atom type="NO3-N" Aexch="29405.6" Aelec="5093.5" Aind="2363.0" Adhf="0.0" Bexp="39.061" C6="0.0013055" C8="0.000100467" C10="8.739500e-06" C12="5.967131e-07"/>
+  <Atom type="NO3-O" Aexch="129962.3" Aelec="65243.7" Aind="0.0" Adhf="7876.5" Bexp="32.125" C6="0.001467" C8="9.34700e-05" C10="7.41171e-06" C12="4.376966e-07"/>
+    <!-- these parameters should be used for TFSI/FSI/triflate anions    -->
+  <Atom type="TFSI-O" Aexch="696545.15" Aelec="225793.0" Aind="0" Adhf="44108.4" Bexp="37.795" C6="0.0012801" C8="7.7656e-05" C10="8.04715e-06" C12="5.28908e-07"/>
+  <Atom type="TFSI-N" Aexch="2193342.4" Aelec="1144954.3" Aind="0" Adhf="0" Bexp="39.061" C6="0.0035676" C8="0.000425002" C10="2.384919e-05" C12="0"/>
+  <Atom type="TFSI-F" Aexch="123398.5" Aelec="34394.1" Aind="787.65" Adhf="4200.8" Bexp="35.962" C6="0.0005251" C8="4.1469e-05" C10="2.39069e-06" C12="9.54729e-08"/>
+  <Atom type="TFSI-S" Aexch="2226948.8" Aelec="44108.4" Aind="2481.1" Adhf="5776.1" Bexp="37.795" C6="0.0049285" C8="0.000480787" C10="3.793327e-05" C12="2.341735e-06"/>
+  <Atom type="TFSI-C" Aexch="304938.7" Aelec="117598.0" Aind="11.7" Adhf="2837.1" Bexp="34.384" C6="0.0013545" C8="5.705e-05" C10="1.80898e-06" C12="5.20977e-08"/>
+    <!-- these parameters should be used for ring carbon, nitrogen, hydrogen atoms of imidazolium cations         --!>
+  <Atom type="IM-Cr" Aexch="422654.8" Aelec="198880.5" Aind="0.0" Adhf="39863.4" Bexp="34.384" C6="0.0014149" C8="6.1588e-05" C10="9.41083e-06" C12="5.057034e-07"/>
+  <Atom type="IM-Nr" Aexch="252624.4" Aelec="102233.5" Aind="0.0" Adhf="17537.3" Bexp="39.061" C6="0.0010187" C8="6.2460e-05" C10="9.21975e-06" C12="6.769417e-07"/>
+  <Atom type="IM-Hr" Aexch="5241.8" Aelec="305.2" Aind="0.0" Adhf="540.4" Bexp="37.776" C6="4.94e-05" C8="1.251e-06" C10="2.2456e-07" C12="0"/>
+    <!-- this carbon type should be used for first adjacent alkyl carbon atoms to imidazolium ring, note different VDWs parameters compared to "C" class... -->
+  <Atom type="IM-Ca1" Aexch="304938.7" Aelec="117598.0" Aind="11.7" Adhf="2837.1" Bexp="34.384" C6="0.0007166" C8="0" C10="0" C12="0"/>         
+  <!-- these parameters should be used for alkyl-ammonium (central N, C, H atoms) cations                --!>
+  <Atom class="TMA-N" Aexch="252625.61" Aelec="102236.97" Aind="0.0" Adhf="17538.34" Bexp="39.061" C6="0.0010187" C8="6.24594e-05" C10="9.21956200000001e-06" C12="6.7692452e-07"/>
+  <Atom class="TMA-H" Aexch="9627.71" Aelec="1310.12" Aind="1071.2" Adhf="1331.13" Bexp="37.794" C6="0.00012945" C8="6.7972e-06" C10="4.996e-07" C12="0"/>
+  <Atom class="TMA-C" Aexch="304938.7" Aelec="117598.0" Aind="11.7" Adhf="2837.1" Bexp="34.384" C6="0.00091067" C8="0" C10="0" C12="0"/>
+  <!-- special hydrogen type for dichloroethane                                              -->
+  <Atom type="dch-H" Aexch="10320.8" Aelec="911.3" Aind="966.184" Adhf="1346.8" Bexp="37.794" C6="0.0001294" C8="6.797e-06" C10="4.996e-07" C12="0"/>
+  <!-- the dispersion parameters for acetonitrile are scaled down by ~2.5 % to implicitly account for 3-body dispersion    -->
+  <Atom type="acn-C" Aexch="304938.7" Aelec="117598.0" Aind="11.7" Adhf="2837.1" Bexp="34.384" C6="0.0013208" C8="5.563e-05" C10="1.764e-06" C12="5.08036e-08"/>
+  <Atom type="acn-Cb" Aexch="159315.3" Aelec="58811.2" Aind="7955.3" Adhf="4305.8" Bexp="34.384" C6="0.0009836" C8="4.5752e-05" C10="3.08927e-06" C12="1.39371e-07"/>
+  <Atom type="acn-N" Aexch="491703.6" Aelec="172626.6" Aind="4148.3" Adhf="28670.5" Bexp="35.904" C6="0.0015419" C8="9.589e-05" C10="1.035016e-05" C12="0"/>
+  <Atom type="acn-H" Aexch="10685.8" Aelec="1260.2" Aind="1023.9" Adhf="1312.8" Bexp="37.794" C6="0.0001262" C8="6.627e-06" C10="4.8711e-07" C12="0"/>
+<!-- all Drude oscillators have zero interaction here.  Give Bexp finite values so combination rule doesn't blow up                -->
+  <Atom class="BSh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="1" C6="0" C8="0" C10="0" C12="0"/>
+  <Atom class="CSh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="1" C6="0" C8="0" C10="0" C12="0"/>
+  <Atom class="NSh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="1" C6="0" C8="0" C10="0" C12="0"/>
+  <Atom class="OSh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="1" C6="0" C8="0" C10="0" C12="0"/>
+  <Atom class="FSh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="1" C6="0" C8="0" C10="0" C12="0"/>
+  <Atom class="PSh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="1" C6="0" C8="0" C10="0" C12="0"/>
+  <Atom class="CLSh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="1" C6="0" C8="0" C10="0" C12="0"/>
+  <Atom class="CbSh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="1" C6="0" C8="0" C10="0" C12="0"/>
+  <Atom class="SSh" Aexch="0" Aelec="0" Aind="0" Adhf="0" Bexp="1" C6="0" C8="0" C10="0" C12="0"/>
+ </CustomNonbondedForce>
+</ForceField>
